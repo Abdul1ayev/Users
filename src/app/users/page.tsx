@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState, ChangeEvent } from "react";
-import { supaBase } from "../create/page";
+import { createClient } from "@/supabase/client"; 
+import Image from "next/image";
+
 
 interface User {
   id: number;
@@ -13,7 +15,7 @@ interface User {
 export default function Users() {
   const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState<User | null>(null);
-
+  const supaBase = createClient();
   const fetchData = async () => {
     const { data, error } = await supaBase.from("users").select("*");
     if (error) {
@@ -150,10 +152,12 @@ export default function Users() {
               <tr key={user.id} className="border-t-2 border-gray-200">
                 <td className="py-4 px-6">{i + 1}</td>
                 <td className="py-4 px-6">
-                  <img
+                  <Image
+                    width={48}
+                    height={48}
                     src={user.avatar}
                     alt="avatar"
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="rounded-full w-12 h-12 object-cover"
                   />
                 </td>
                 <td className="py-4 px-6 text-gray-800 font-semibold">

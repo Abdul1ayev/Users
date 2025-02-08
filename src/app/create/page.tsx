@@ -1,19 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { createClient } from "@supabase/supabase-js";
-
-export const supaBase = createClient(
-  "https://myknsdwmgkaeejfzgvql.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im15a25zZHdtZ2thZWVqZnpndnFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzg2NjUyNTIsImV4cCI6MjA1NDI0MTI1Mn0.boL55_2MC2jL5cYUtKzSIAZCfXHBdZcLnav7S1VRWec"
-);
+import { createClient } from "@/supabase/client";
 
 export default function Create() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
   const [avatar, setAvatar] = useState("");
-
+  const supaBase = createClient();
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -49,7 +44,6 @@ export default function Create() {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-[400px] p-6 bg-white">
-        
         <div className="w-[150px] h-[150px] rounded-full border-dashed border-3 border-gray-500 mx-auto mb-6 flex justify-center items-center">
           <label htmlFor="avatar" className="cursor-pointer">
             {avatar ? (
