@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { createClient } from "@/supabase/client";
+import Image from "next/image";
 
 export default function Create() {
   const [name, setName] = useState("");
@@ -47,7 +48,9 @@ export default function Create() {
         <div className="w-[150px] h-[150px] rounded-full border-dashed border-3 border-gray-500 mx-auto mb-6 flex justify-center items-center">
           <label htmlFor="avatar" className="cursor-pointer">
             {avatar ? (
-              <img
+              <Image
+                width={150}
+                height={150}
                 src={avatar}
                 alt="Avatar"
                 className="w-full h-full object-cover rounded-full"
